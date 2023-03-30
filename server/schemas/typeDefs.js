@@ -15,7 +15,7 @@ type User {
         description: String!
     }
 
-    type drinkInput {
+    input drinkInput {
         name: String!
         drinkId: String!
         description: String!
