@@ -21,8 +21,7 @@ type User {
       }
 
     type Query {
-        user: [User] 
-        drink(name: )
+        me: User
     }
 
     type Mutation {
