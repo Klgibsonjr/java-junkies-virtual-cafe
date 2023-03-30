@@ -15,6 +15,12 @@ type User {
         description: String!
     }
 
+    type drinkInput {
+        name: String!
+        drinkId: String!
+        description: String!
+    }
+
     type Auth {
         token: ID!
         user: User
@@ -27,6 +33,8 @@ type User {
     type Mutation {
         login(email: String!, password: String!): Auth
         addUser(username: String!, email: String!, password: String!): Auth
+        saveDrink(drinkData: drinkInput!): User
+        removeDrink(drinkId: ID!): User
     }
 
 `
