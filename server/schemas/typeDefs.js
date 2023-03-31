@@ -31,7 +31,7 @@ type User {
         name: String!
         drinkId: String!
         description: String!
-        recipe: [Recipe]
+        recipe: String!
     }
 
     type Auth {
