@@ -1,5 +1,6 @@
 import React from 'react';
-import Header from './components/Header';
+
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import {
   ApolloClient,
@@ -8,7 +9,10 @@ import {
   createHttpLink,
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
-import Playlist from './components/Playlist';
+
+import Home from './pages/Home';
+import LogIn from './pages/LogIn';
+import Header from './components/Header';
 
 // Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
@@ -37,12 +41,17 @@ const client = new ApolloClient({
 function App() {
   return (
     <ApolloProvider client={client}>
-      <div className='w-full h-screen bg'>
-        <div className='overlay'>
-          <Header />
-          <Playlist />
+      <Router>
+        <div className='w-full h-screen bg'>
+          <div className='overlay'>
+            <Header />
+            <Routes>
+              <Route path='/' element={<Home />} />
+              <Route path='/login' element={<LogIn />} />
+            </Routes>
+          </div>
         </div>
-      </div>
+      </Router>
     </ApolloProvider>
   );
 }
