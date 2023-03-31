@@ -12,7 +12,7 @@ import { QUERY_ME } from '../utils/queries';
 import { REMOVE_DRINK } from '../utils/mutations';
 import { saveBookId } from '../utils/localStorage';
 
-import Auth from '../utils/auth';
+import Auth from '../utils/Auth';
 
 const SavedDrinks = () => {
   const { loading, data } = useQuery(QUERY_ME);
@@ -68,7 +68,19 @@ const SavedDrinks = () => {
                     <Card.Body>
                       <Card.Title>{drink.name}</Card.Title>
                       <Card.Text>{drink.description}</Card.Text>
-                      <Card.Text>{drink.recipe}</Card.Text>
+                      <Card.Text>Ingredients</Card.Text>
+                      {drink.recipe.ingredients.map((ingredient) => {
+                        return (
+                            <p>{ingredient.name}</p>
+                        )
+                      })}
+                      <Card.Text>Instructions</Card.Text>
+                      {drink.recipe.instructions.map((instruction) => {
+                        return (
+                            <p>{instructions}</p>
+                        )
+                      })}
+                      <Card.Text>{drink.recipe.ingredian}</Card.Text>
                       <Card.Text>{drink.yield}</Card.Text>
                       <Button
                         className="btn-block btn-danger"
