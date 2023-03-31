@@ -1,4 +1,6 @@
 import React from 'react';
+import Header from './components/Header';
+
 import {
   ApolloClient,
   InMemoryCache,
@@ -32,14 +34,15 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
-
 function App() {
   return (
     <ApolloProvider client={client}>
-    <div className='App'>
-      <h1 className='text-4xl'>Java Junkies Cafe</h1>
-    </div>
-    <Playlist />
+      <div className='w-full h-screen bg'>
+        <div className='overlay'>
+          <Header />
+          <Playlist />
+        </div>
+      </div>
     </ApolloProvider>
   );
 }
