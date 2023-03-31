@@ -51,12 +51,17 @@ const SearchDrinks = () => {
             throw new Error('an error occured');
         }
 
-        const { items } = await response.json();
+        const items  = await response.json();
+        console.log(items)
+
 
         const drinkData = items.map((drink) => ({
             drinkId: drink.id,
             name: drink.name,
             description: drink.description,
+            recipe: drink.recipe,
+            ingredients: drink.recipe.ingredients,
+            instructions: drink.recipe.instructions
         }));
 
         setSearchDrinks(drinkData);
@@ -126,17 +131,22 @@ const SearchDrinks = () => {
                 return (
                   <Col md="4">
                     <Card key={drink.drinkId} border="dark" className='mb-3'>
-                      {drink.image ? (
-                        <Card.Img
-                          src={drink.image}
-                          alt={drink.name}
-                          variant="top"
-                        />
-                      ) : null}
-                      <Card.Body>
-                        <Card.Title>{drink.name}</Card.Title>
-                        <p className="small">Drink: {drink.name}</p>
-                        <Card.Text>{drink.description}</Card.Text>
+                    <Card.Body>
+                      <Card.Title>{drink.name}</Card.Title>
+                      <Card.Text>{drink.description}</Card.Text>
+                      <Card.Text>Ingredients</Card.Text>
+                      {console.log(drink)}
+                      {drink.recipe.ingredients.map((ingredient) => {
+                        return (
+                            <p>{ingredient.name}</p>
+                        )
+                      })}
+                      <Card.Text>Instructions</Card.Text>
+                      {drink.recipe.instructions.map((instruction) => {
+                        return (
+                            <p>{instruction}</p>
+                        )
+                      })}
                         {Auth.loggedIn() && (
                           <Button
                             disabled={savedDrinkIds?.some(

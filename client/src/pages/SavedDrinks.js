@@ -80,8 +80,6 @@ const SavedDrinks = () => {
                             <p>{instruction}</p>
                         )
                       })}
-                      <Card.Text>{drink.recipe.ingredian}</Card.Text>
-                      <Card.Text>{drink.yield}</Card.Text>
                       <Button
                         className="btn-block btn-danger"
                         onClick={() => handleDeleteDrink(drink.drinkId)}
