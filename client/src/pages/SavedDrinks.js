@@ -10,7 +10,7 @@ import {
 import { useQuery, useMutation } from '@apollo/client';
 import { QUERY_ME } from '../utils/queries';
 import { REMOVE_DRINK } from '../utils/mutations';
-import { saveBookId } from '../utils/localStorage';
+import { removeDrinkId } from '../utils/localStorage';
 
 import Auth from '../utils/Auth';
 
@@ -77,7 +77,7 @@ const SavedDrinks = () => {
                       <Card.Text>Instructions</Card.Text>
                       {drink.recipe.instructions.map((instruction) => {
                         return (
-                            <p>{instructions}</p>
+                            <p>{instruction}</p>
                         )
                       })}
                       <Card.Text>{drink.recipe.ingredian}</Card.Text>
