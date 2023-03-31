@@ -13,6 +13,18 @@ type User {
         drinkId: ID!
         name: String!
         description: String!
+        recipe: [Recipe]
+    }
+
+    type Recipe {
+        ingredients: [Ingredients]
+        instructions: [String]
+        yield: String
+    }
+
+    type Ingredients {
+        name: String
+        quantity: String
     }
 
     input drinkInput {
