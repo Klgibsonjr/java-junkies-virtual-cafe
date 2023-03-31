@@ -10,21 +10,21 @@ import {
 
 import { useMutation } from '@apollo/client';
 import { SAVE_DRINK } from '../utils/mutations';
-import { saveDrinkId, getSavedDrinkId } from '../utils/localStorage';
+import { saveDrinkIds, getSavedDrinkIds } from '../utils/localStorage';
 
-import Auth from '../utils/auth';
+import Auth from '../utils/Auth';
 
 const SearchDrinks = () => {
     const [searchedDrinks, setSearchDrinks] = useState([]);
 
     const [searchInput, setSearchInput] = useState('');
 
-    const [savedDrinkIds, setSavedDrinkIds] = useState(getSavedDrinkId());
+    const [savedDrinkIds, setSavedDrinkIds] = useState(getSavedDrinkIds());
 
     const [saveDrink, { error }] = useMutation(SAVE_DRINK);
 
     useEffect(() => {
-        return () => savedDrinkIds(savedDrinkIds);
+        return () => saveDrinkIds(savedDrinkIds);
     });
 
     const handleFormSubmit = async (e) => {
@@ -35,8 +35,16 @@ const SearchDrinks = () => {
        }
 
        try {
+        const options = {
+          method: 'GET',
+          headers: {
+            'X-RapidAPI-Key': '7c93ec7a5amshf9e36677ec2289ap19d7e2jsn801dbf383736',
+            'X-RapidAPI-Host': 'the-coffee-api.p.rapidapi.com'
+          }
+        };
+        
         const response = await fetch(
-            `https://the-coffee-api.p.rapidapi.com/drinks/${searchInput}?keys=`
+            `https://the-coffee-api.p.rapidapi.com/drinks/${searchInput}?keys=description%2Crecipe`, options
         );
 
         if (!response.ok) {
@@ -72,7 +80,7 @@ const SearchDrinks = () => {
             const { data } = await saveDrink({
                 variables: { drinkData: { ...drinkToSave } },
             })
-            console.log(saveDrinkId);
+            console.log(saveDrinkIds);
             setSavedDrinkIds([...savedDrinkIds, drinkToSave.drinkId]);
 
         } catch (err) {
