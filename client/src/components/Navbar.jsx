@@ -1,6 +1,7 @@
 import React from 'react';
 import logo from '../assests/images/java_logo.png';
 import { Link } from 'react-router-dom';
+import Auth from '../utils/Auth';
 
 const Navbar = () => {
   return (
@@ -22,14 +23,23 @@ const Navbar = () => {
               </p>
             </div>
           </a>
-          <div className='flex gap-4 mr-8'>
-            <div className='text-slate-100 text-md sm:text-xl font-bold'>
-              <Link to='/login'>Login</Link>
-            </div>
-            <div className='text-slate-100 text-md sm:text-xl font-bold'>
-              <Link to='/signup'>Sign Up</Link>
-            </div>
-          </div>
+          {Auth.loggedIn() ? (
+                <>
+                  <div>
+                  <Link to='/saved'>Saved Drinks</Link>
+                  </div>
+                  <Link onClick={Auth.logout}>Logout</Link>
+                </>
+              ) : (
+                <div className='flex gap-4 mr-8'>
+                <div className='text-slate-100 text-md sm:text-xl font-bold'>
+                  <Link to='/login'>Login</Link>
+                </div>
+                <div className='text-slate-100 text-md sm:text-xl font-bold'>
+                  <Link to='/signup'>Sign Up</Link>
+                </div>
+              </div>
+              )}
         </div>
       </nav>
     </header>

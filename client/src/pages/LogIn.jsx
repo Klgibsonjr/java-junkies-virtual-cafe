@@ -1,39 +1,58 @@
 import React, { useState, useEffect } from 'react';
 
+import { useMutation } from '@apollo/client';
+import { LOGIN_USER } from '../utils/mutations';
+
+import Auth from '../utils/Auth';
+
 const LogIn = () => {
   const formInputValues = { username: '', password: '' };
   const [formValues, setFormValues] = useState(formInputValues);
   const [formErrors, setFormErrors] = useState({});
   const [formSubmit, setFormSubmit] = useState(false);
+  const [validated] = useState(false);
+  const [showAlert, setShowAlert] = useState(false);
+
+  const [login, { error }] = useMutation(LOGIN_USER);
+
+  useEffect(() => {
+    if (error) {
+      setShowAlert(true);
+    } else {
+      setShowAlert(false);
+    }
+  }, [error]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormValues({ ...formValues, [name]: value });
   };
 
-  const handleFormSubmit = (e) => {
-    e.preventDefault();
-    setFormErrors(validate(formValues));
-    setFormSubmit(true);
-  };
+  const handleFormSubmit = async (event) => {
+    event.preventDefault();
 
-  useEffect(() => {
-    // console.log(formErrors);
-    if (Object.keys(formErrors).length === 0 && formSubmit) {
-      console.log(formValues);
+    const form = event.currentTarget;
+    if (form.checkValidity() === false) {
+      event.preventDefault();
+      event.stopPropagation();
     }
-  }, [formErrors, formSubmit, formValues]);
 
-  const validate = (values) => {
-    const errors = {};
+    try {
+      const { data } = await login({
+        variables: { ...formValues },
+      });
 
-    if (!values.username) {
-      errors.username = 'A username is required!';
+      console.log(data);
+      Auth.login(data.login.token);
+    } catch (e) {
+      console.error(e);
     }
-    if (!values.password) {
-      errors.password = 'A password is required!';
-    }
-    return errors;
+
+    // clear form values
+    setFormValues({
+      username: '',
+      password: '',
+    });
   };
 
   return (
@@ -52,7 +71,6 @@ const LogIn = () => {
             placeholder='Enter username here'
             value={formValues.username}
             onChange={handleInputChange}
-            onBlur={handleFormSubmit}
             className='bg-gray-50 border border-gray-300 text-gray-700 text-md rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-200 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
           />
         </div>
@@ -60,7 +78,7 @@ const LogIn = () => {
 
         <div className='mb-6'>
           <label
-            htmlFor='email'
+            htmlFor='password'
             className='block m-2 text-lg font-medium text-gray-900 dark:text-white'
           >
             Password
@@ -71,7 +89,6 @@ const LogIn = () => {
             placeholder='Enter your password'
             value={formValues.password}
             onChange={handleInputChange}
-            onBlur={handleFormSubmit}
             className='bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-200 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
           />
         </div>
