@@ -9,10 +9,10 @@ type User {
     }   
 
     type Drink {
-        drinkId: ID!
+        drinkId: ID
         name: String!
         description: String!
-        recipe: [Recipe]
+        recipe: Recipe
     }
 
     type Recipe {
@@ -26,11 +26,22 @@ type User {
         quantity: String
     }
 
+    input IngredientInput {
+      name: String
+      quantity: String
+    }
+
+    input RecipeInput {
+        ingredients: [IngredientInput]
+        instructions: [String]
+        yield: String
+      }
+
     input drinkInput {
         name: String!
-        drinkId: String!
+        drinkId: ID
         description: String!
-        recipe: String!
+        recipe: RecipeInput
     }
 
     type Auth {
@@ -46,7 +57,7 @@ type User {
         login(username: String!, password: String!): Auth
         addUser(username: String!, email: String!, password: String!): Auth
         saveDrink(drinkData: drinkInput!): User
-        removeDrink(drinkId: ID!): User
+        removeDrink(name: String!): User
     }
 
 `

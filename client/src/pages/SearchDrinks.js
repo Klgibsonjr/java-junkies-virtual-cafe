@@ -52,16 +52,11 @@ const SearchDrinks = () => {
         }
 
         const items  = await response.json();
-        console.log(items)
-
 
         const drinkData = items.map((drink) => ({
-            drinkId: drink.id,
             name: drink.name,
             description: drink.description,
-            recipe: drink.recipe,
-            ingredients: drink.recipe.ingredients,
-            instructions: drink.recipe.instructions
+            recipe: drink.recipe
         }));
 
         setSearchDrinks(drinkData);
@@ -72,8 +67,8 @@ const SearchDrinks = () => {
        }
     };
 
-    const handleSaveDrink = async (drinkId) => {
-        const drinkToSave = searchedDrinks.find((drink) => drink.drinkId === drinkId);
+    const handleSaveDrink = async (name) => {
+        const drinkToSave = searchedDrinks.find((drink) => drink.name === name);
 
         const token = Auth.loggedIn() ? Auth.getToken() : null;
 
@@ -84,9 +79,9 @@ const SearchDrinks = () => {
         try {
             const { data } = await saveDrink({
                 variables: { drinkData: { ...drinkToSave } },
-            })
-            console.log(saveDrinkIds);
-            setSavedDrinkIds([...savedDrinkIds, drinkToSave.drinkId]);
+            });
+            console.log(`data: ${data}`);
+            setSavedDrinkIds([...savedDrinkIds, drinkToSave.name]);
 
         } catch (err) {
             console.error(err);
@@ -130,12 +125,11 @@ const SearchDrinks = () => {
               {searchedDrinks.map((drink) => {
                 return (
                   <Col md="4">
-                    <Card key={drink.drinkId} border="dark" className='mb-3'>
+                    <Card key={drink.name} border="dark" className='mb-3'>
                     <Card.Body>
                       <Card.Title>{drink.name}</Card.Title>
                       <Card.Text>{drink.description}</Card.Text>
                       <Card.Text>Ingredients</Card.Text>
-                      {console.log(drink)}
                       {drink.recipe.ingredients.map((ingredient) => {
                         return (
                             <p>{ingredient.name}</p>
@@ -150,12 +144,12 @@ const SearchDrinks = () => {
                         {Auth.loggedIn() && (
                           <Button
                             disabled={savedDrinkIds?.some(
-                              (savedId) => savedId === drink.drinkId
+                              (savedId) => savedId === drink.name
                             )}
                             className="btn-block btn-info"
-                            onClick={() => handleSaveDrink(drink.drinkId)}
+                            onClick={() => handleSaveDrink(drink.name)}
                           >
-                            {savedDrinkIds?.some((savedId) => savedId === drink.drinkId)
+                            {savedDrinkIds?.some((savedId) => savedId === drink.name)
                               ? 'Drink Already Saved!'
                               : 'Save This Drink!'}
                           </Button>

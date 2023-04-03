@@ -21,7 +21,7 @@ const SavedDrinks = () => {
   const userData = data?.me || {};
 
   // create function that accepts the book's mongo _id value as param and deletes the book from the database
-  const handleDeleteDrink = async (drinkId) => {
+  const handleDeleteDrink = async (name) => {
     // get token
     const token = Auth.loggedIn() ? Auth.getToken() : null;
 
@@ -31,11 +31,11 @@ const SavedDrinks = () => {
 
     try {
       const { data } = await removeDrink({
-        variables: { drinkId },
+        variables: { name },
       });
 
       // upon success, remove book's id from localStorage
-      removeDrinkId(drinkId);
+      removeDrinkId(name);
     } catch (err) {
       console.error(err);
     }
@@ -64,7 +64,7 @@ const SavedDrinks = () => {
             {userData.savedDrinks?.map((drink) => {
               return (
                 <Col md="4">
-                  <Card key={drink.drinkId} border="dark">
+                  <Card key={drink.name} border="dark">
                     <Card.Body>
                       <Card.Title>{drink.name}</Card.Title>
                       <Card.Text>{drink.description}</Card.Text>
@@ -82,7 +82,7 @@ const SavedDrinks = () => {
                       })}
                       <Button
                         className="btn-block btn-danger"
-                        onClick={() => handleDeleteDrink(drink.drinkId)}
+                        onClick={() => handleDeleteDrink(drink.name)}
                       >
                         Delete this Drink!
                       </Button>
