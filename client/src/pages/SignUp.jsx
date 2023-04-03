@@ -1,32 +1,18 @@
-import React, { useState, useEffect } from 'react';
-import { Form, Button, Alert } from 'react-bootstrap';
-
 import { useMutation } from '@apollo/client';
 import { ADD_USER } from '../utils/mutations';
 
 import Auth from '../utils/Auth';
 
+import React, { useState } from 'react';
+
 const SignUp = () => {
-  // set initial form state
   const [userFormData, setUserFormData] = useState({
     username: '',
     email: '',
     password: '',
   });
-  // set state for form validation
-  const [validated] = useState(false);
-  // set state for alert
-  const [showAlert, setShowAlert] = useState(false);
 
   const [addUser, { error }] = useMutation(ADD_USER);
-
-  useEffect(() => {
-    if (error) {
-      setShowAlert(true);
-    } else {
-      setShowAlert(false);
-    }
-  }, [error]);
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -35,13 +21,6 @@ const SignUp = () => {
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-
-    // check if form has everything (as per react-bootstrap docs)
-    const form = event.currentTarget;
-    if (form.checkValidity() === false) {
-      event.preventDefault();
-      event.stopPropagation();
-    }
 
     try {
       const { data } = await addUser({
@@ -61,64 +40,66 @@ const SignUp = () => {
   };
 
   return (
-    <>
-      {/* This is needed for the validation functionality above */}
-      <Form noValidate validated={validated} onSubmit={handleFormSubmit}>
-        {/* show alert if server response is bad */}
-        <Alert
-          dismissible
-          onClose={() => setShowAlert(false)}
-          show={showAlert}
-          variant="danger"
-        >
-          Something went wrong with your signup!
-        </Alert>
-
-        <Form.Group className='mb-3'>
-          <Form.Label htmlFor="username">Username</Form.Label>
-          <Form.Control
+    <div className="flex flex-col items-center mt-8">
+      <h2 className="text-3xl font-medium mb-4">Sign Up</h2>
+      <form className="w-1/2" onSubmit={handleFormSubmit}>
+        <div className="mb-4">
+          <label
+            className="block text-gray-700 font-bold mb-2"
+            htmlFor="username"
+          >
+            Username
+          </label>
+          <input
+            className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            id="username"
+            name="username"
             type="text"
             placeholder="Your username"
-            name="username"
-            onChange={handleInputChange}
             value={userFormData.username}
+            onChange={handleInputChange}
             required
           />
-          <Form.Control.Feedback type="invalid">
-            Username is required!
-          </Form.Control.Feedback>
-        </Form.Group>
-
-        <Form.Group className='mb-3'>
-          <Form.Label htmlFor="email">Email</Form.Label>
-          <Form.Control
+        </div>
+        <div className="mb-4">
+          <label
+            className="block text-gray-700 font-bold mb-2"
+            htmlFor="email"
+          >
+            Email
+          </label>
+          <input
+            className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            id="email"
+            name="email"
             type="email"
             placeholder="Your email address"
-            name="email"
-            onChange={handleInputChange}
             value={userFormData.email}
+            onChange={handleInputChange}
             required
           />
-          <Form.Control.Feedback type="invalid">
-            Email is required!
-          </Form.Control.Feedback>
-        </Form.Group>
-
-        <Form.Group className='mb-3'>
-          <Form.Label htmlFor="password">Password</Form.Label>
-          <Form.Control
+        </div>
+        <div className="mb-6">
+          <label
+            className="block text-gray-700 font-bold mb-2"
+            htmlFor="password"
+          >
+            Password
+          </label>
+          <input
+            className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            id="password"
+            name="password"
             type="password"
             placeholder="Your password"
-            name="password"
-            onChange={handleInputChange}
             value={userFormData.password}
+            onChange={handleInputChange}
             required
           />
-          <Form.Control.Feedback type="invalid">
-            Password is required!
-          </Form.Control.Feedback>
-        </Form.Group>
-        <Button
+        </div>
+        <button
+          className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+          type="submit"
           disabled={
             !(
               userFormData.username &&
@@ -126,13 +107,11 @@ const SignUp = () => {
               userFormData.password
             )
           }
-          type="submit"
-          variant="success"
         >
-          Submit
-        </Button>
-      </Form>
-    </>
+          Sign Up
+        </button>
+      </form>
+    </div>
   );
 };
 
