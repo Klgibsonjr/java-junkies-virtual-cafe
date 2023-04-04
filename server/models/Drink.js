@@ -1,10 +1,6 @@
-const { Schema } = require('mongoose');
+const { Schema, model } = require('mongoose');
 
 const drinkSchema = new Schema({
-    id: {
-        type: Number,
-        required: true,
-    },
     name: {
         type: String,
         required: true,
@@ -20,11 +16,12 @@ const drinkSchema = new Schema({
             }
         ],
         instructions: [{type: String, required: true}],
-    },
-    yield: {
-        type: String,
-        required: true,
+        yield: {
+            type: String,
+        }
     },
 });
+
+const Drink = model('Drink', drinkSchema);
 
 module.exports = drinkSchema

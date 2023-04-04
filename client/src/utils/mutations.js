@@ -25,14 +25,12 @@ export const LOGIN_USER = gql`
 `;
 
 export const SAVE_DRINK = gql`
-  mutation saveDrink($drinkData: DrinkInput!) {
+  mutation saveDrink($drinkData: drinkInput!) {
     saveDrink(drinkData: $drinkData) {
         _id
         username
         email
-        password
         savedDrinks {
-            drinkId
             name
             description
             recipe {
@@ -49,12 +47,11 @@ export const SAVE_DRINK = gql`
 `;
 
 export const REMOVE_DRINK = gql`
-  mutation removeDrink($drinkId: ID!) {
-    removeDrink(drinkId: $drinkId) {
+  mutation removeDrink($name: String!) {
+    removeDrink(name: $name) {
         _id
         username
         email
-        password
         savedDrinks {
             drinkId
             name
