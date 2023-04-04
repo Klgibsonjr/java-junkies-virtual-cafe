@@ -47,55 +47,53 @@ const SavedDrinks = () => {
 
   return (
     <>
-      <div fluid className="text-light bg-dark p-5">
-        <Container>
-          <h1>Viewing {userData.username}'s drinks!</h1>
-        </Container>
+      <div className='text-slate-100 bg-coffee p-5'>
+        <div className="container mx-auto">
+          <h1 className="text-4xl font-bold">Viewing {userData.username}'s drinks!</h1>
+        </div>
       </div>
-      <Container>
-        <h2 className='pt-5'>
+  
+      <div className="container mx-auto pt-5">
+        <h2 className='text-slate-100 text-2xl sm:text-3xl font-bold mb-5'>
           {userData.savedDrinks?.length
             ? `Viewing ${userData.savedDrinks.length} saved ${userData.savedDrinks.length === 1 ? 'drink' : 'drinks'
             }:`
             : 'You have no saved drinks!'}
         </h2>
-        <div>
-          <Row>
-            {userData.savedDrinks?.map((drink) => {
-              return (
-                <Col md="4">
-                  <Card key={drink.name} border="dark">
-                    <Card.Body>
-                      <Card.Title>{drink.name}</Card.Title>
-                      <Card.Text>{drink.description}</Card.Text>
-                      <Card.Text>Ingredients</Card.Text>
-                      {drink.recipe.ingredients.map((ingredient) => {
-                        return (
-                            <p>{ingredient.name}</p>
-                        )
-                      })}
-                      <Card.Text>Instructions</Card.Text>
-                      {drink.recipe.instructions.map((instruction) => {
-                        return (
-                            <p>{instruction}</p>
-                        )
-                      })}
-                      <Button
-                        className="btn-block btn-danger"
-                        onClick={() => handleDeleteDrink(drink.name)}
-                      >
-                        Delete this Drink!
-                      </Button>
-                    </Card.Body>
-                  </Card>
-                </Col>
-              );
-            })}
-          </Row>
+        <div className="flex flex-wrap -mx-2">
+          {userData.savedDrinks?.map((drink) => (
+            <div className='bg-card rounded-lg shadow-md' key={drink.name}>
+              <div className="p-4">
+                <h3 className="text-xl font-bold mb-2">{drink.name}</h3>
+                <p className='text-gray-800 mb-4'>{drink.description}</p>
+  
+                <h4 className="font-bold mb-2">Ingredients</h4>
+                <ul className="mb-4 list-disc list-inside">
+                  {drink.recipe.ingredients.map((ingredient) => (
+                    <li key={ingredient.name}>{ingredient.quantity} {ingredient.name}</li>
+                  ))}
+                </ul>
+  
+                <h4 className="font-bold mb-2">Instructions</h4>
+                <ol className="mb-4 list-decimal list-inside">
+                  {drink.recipe.instructions.map((instruction) => (
+                    <li key={instruction}>{instruction}</li>
+                  ))}
+                </ol>
+  
+                <button
+                  className="w-full bg-red-500 hover:bg-red-600 text-white py-2 rounded mt-2"
+                  onClick={() => handleDeleteDrink(drink.name)}
+                >
+                  Delete this Drink!
+                </button>
+              </div>
+            </div>
+          ))}
         </div>
-      </Container>
+      </div>
     </>
-  );
+  ); 
 };
 
 export default SavedDrinks;
