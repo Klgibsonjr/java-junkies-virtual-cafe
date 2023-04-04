@@ -38,7 +38,7 @@ const SearchDrinks = () => {
         const options = {
           method: 'GET',
           headers: {
-            'X-RapidAPI-Key': '7c93ec7a5amshf9e36677ec2289ap19d7e2jsn801dbf383736',
+            'X-RapidAPI-Key': process.env.REACT_APP_RAPID_API_KEY,
             'X-RapidAPI-Host': 'the-coffee-api.p.rapidapi.com'
           }
         };
