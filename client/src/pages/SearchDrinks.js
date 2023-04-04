@@ -1,12 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import {
-    Container,
-    Col,
-    Form,
-    Button,
-    Card,
-    Row
-  } from 'react-bootstrap';
 
 import { useMutation } from '@apollo/client';
 import { SAVE_DRINK } from '../utils/mutations';
@@ -89,80 +81,77 @@ const SearchDrinks = () => {
     };
 
     return (
-        <>
-          <div className="text-light bg-dark p-5">
-            <Container>
-              <h1>Search for Drinks!</h1>
-              <Form onSubmit={handleFormSubmit}>
-                <Row>
-                  <Col xs={12} md={8}>
-                    <Form.Control
-                      name="searchInput"
-                      value={searchInput}
-                      onChange={(e) => setSearchInput(e.target.value)}
-                      type="text"
-                      size="lg"
-                      placeholder="Search for a drink"
-                    />
-                  </Col>
-                  <Col xs={12} md={4}>
-                    <Button type="submit" variant="success" size="lg">
-                      Search
-                    </Button>
-                  </Col>
-                </Row>
-              </Form>
-            </Container>
+      <>
+        <div className="text-white bg-coffee p-5">
+          <div className="max-w-7xl mx-auto">
+            <h1 className="text-4xl font-bold mb-4">Search for Drinks!</h1>
+            <form onSubmit={handleFormSubmit}>
+              <div className="flex flex-col md:flex-row">
+                <div className="flex-1 mb-3 md:mr-3">
+                  <input
+                    name="searchInput"
+                    value={searchInput}
+                    onChange={(e) => setSearchInput(e.target.value)}
+                    type="text"
+                    className="w-full px-4 py-2 rounded-lg bg-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    placeholder="Search for a drink"
+                  />
+                </div>
+                <div>
+                  <button
+                    type="submit"
+                    className="w-full px-4 py-2 text-white bg-gray-800 rounded-lg md:w-auto md:ml-2 hover:bg-blue-500"
+                  >
+                    Search
+                  </button>
+                </div>
+              </div>
+            </form>
           </div>
+        </div>
     
-          <Container>
-            <h2 className='pt-5'>
-              {searchedDrinks.length
-                ? `Viewing ${searchedDrinks.length} results:`
-                : 'Search for a drink to begin'}
-            </h2>
-            <Row>
-              {searchedDrinks.map((drink) => {
-                return (
-                  <Col md="4">
-                    <Card key={drink.name} border="dark" className='mb-3'>
-                    <Card.Body>
-                      <Card.Title>{drink.name}</Card.Title>
-                      <Card.Text>{drink.description}</Card.Text>
-                      <Card.Text>Ingredients</Card.Text>
-                      {drink.recipe.ingredients.map((ingredient) => {
-                        return (
-                            <p>{ingredient.name}</p>
-                        )
-                      })}
-                      <Card.Text>Instructions</Card.Text>
-                      {drink.recipe.instructions.map((instruction) => {
-                        return (
-                            <p>{instruction}</p>
-                        )
-                      })}
-                        {Auth.loggedIn() && (
-                          <Button
-                            disabled={savedDrinkIds?.some(
-                              (savedId) => savedId === drink.name
-                            )}
-                            className="btn-block btn-info"
-                            onClick={() => handleSaveDrink(drink.name)}
-                          >
-                            {savedDrinkIds?.some((savedId) => savedId === drink.name)
-                              ? 'Drink Already Saved!'
-                              : 'Save This Drink!'}
-                          </Button>
+        <div className="max-w-7xl mx-auto py-5">
+          <h2 className="text-white text-3xl font-bold mb-5">
+            {searchedDrinks.length
+              ? `Viewing ${searchedDrinks.length} results:`
+              : 'Search for a drink to begin'}
+          </h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+            {searchedDrinks.map((drink) => {
+              return (
+                <div key={drink.name} className="bg-card rounded-lg shadow-md">
+                  <div className="p-4">
+                    <h3 className="text-xl font-bold mb-2">{drink.name}</h3>
+                    <p className="text-gray-500 mb-4">{drink.description}</p>
+                    <h4 className="text-lg font-bold mb-2">Ingredients:</h4>
+                    {drink.recipe.ingredients.map((ingredient) => {
+                      return <p key={ingredient.name}>{ingredient.quantity} {ingredient.name}</p>;
+                    })}
+                    <h4 className="text-lg font-bold mb-2">Instructions:</h4>
+                    {drink.recipe.instructions.map((instruction) => {
+                      return <p key={instruction}>{instruction}</p>;
+                    })}
+                    {Auth.loggedIn() && (
+                      <button
+                        disabled={savedDrinkIds?.some(
+                          (savedId) => savedId === drink.name
                         )}
-                      </Card.Body>
-                    </Card>
-                  </Col>
-                );
-              })}
-            </Row>
-          </Container>
-        </>
-      );
+                        className="w-full px-4 py-2 text-white bg-gray-800 hover:bg-blue-500 rounded-lg mt-4"
+                        onClick={() => handleSaveDrink(drink.name)}
+                      >
+                        {savedDrinkIds?.some((savedId) => savedId === drink.name)
+                          ? 'Drink Already Saved!'
+                          : 'Save This Drink!'}
+                      </button>
+                    )}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </>
+    );
 };
 
 export default SearchDrinks;
