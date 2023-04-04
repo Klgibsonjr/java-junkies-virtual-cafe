@@ -1,6 +1,10 @@
 {
   "name": "java-junkies-virtual-cafe",
   "version": "1.0.0",
+  "engines": {
+    "node": "16.19.1",
+    "npm": "8.19.3"
+  },
   "description": "",
   "main": "server/server.js",
   "scripts": {
