@@ -10,7 +10,6 @@ const LogIn = () => {
   const [formValues, setFormValues] = useState(formInputValues);
   const [formErrors, setFormErrors] = useState({});
   const [formSubmit, setFormSubmit] = useState(false);
-  const [validated] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
 
   const [login, { error }] = useMutation(LOGIN_USER);
@@ -56,53 +55,55 @@ const LogIn = () => {
   };
 
   return (
-    <div>
-      <form
-        onSubmit={handleFormSubmit}
-        className='w-auto my-10 mx-10 md:w-[75vh] md:mx-auto '
-      >
-        <div className='mb-6'>
-          <label className='block m-2 text-lg font-medium text-gray-900 dark:text-white'>
+    <div className='flex flex-col items-center mt-10'>
+      <h2 className='text-3xl sm:text-5xl font-bold mb-4 text-slate-100 drop-shadow-xl'>
+        Login{' '}
+      </h2>
+      <form className='w-1/2' onSubmit={handleFormSubmit}>
+        <div className='mb-4'>
+          <label
+            className='block text-slate-100 font-bold mb-2 drop-shadow-xl '
+            htmlFor='username'
+          >
             Username
           </label>
           <input
-            type='text'
+            className='appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+            id='username'
             name='username'
-            placeholder='Enter username here'
+            type='text'
+            placeholder='Enter username'
             value={formValues.username}
             onChange={handleInputChange}
-            className='bg-gray-50 border border-gray-300 text-gray-700 text-md rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-200 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
+            required
           />
         </div>
-        <p className='text-md text-red-700'>{formErrors.username}</p>
 
         <div className='mb-6'>
           <label
             htmlFor='password'
-            className='block m-2 text-lg font-medium text-gray-900 dark:text-white'
+            className='block text-slate-100 font-bold mb-2 drop-shadow-xl'
           >
             Password
           </label>
           <input
-            type='password'
+            className='appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+            id='password'
             name='password'
+            type='password'
             placeholder='Enter your password'
             value={formValues.password}
             onChange={handleInputChange}
-            className='bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-200 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
+            required
           />
-        </div>
-        <p className='text-md text-red-700'>{formErrors.password}</p>
-        <div className='flex items-start mb-6'>
-          <div className='flex items-center h-5'></div>
         </div>
 
         <button
+          className='bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded cursor-pointer focus:outline-none focus:shadow-outline'
           type='submit'
-          onClick={handleFormSubmit}
-          className='text-white mt-8 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800'
+          disabled={!(formValues.username && formValues.password)}
         >
-          Submit
+          Login
         </button>
       </form>
     </div>
