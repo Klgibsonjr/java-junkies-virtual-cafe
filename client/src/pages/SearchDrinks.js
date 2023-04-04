@@ -121,19 +121,24 @@ const SearchDrinks = () => {
               <div key={drink.name} className='bg-card rounded-lg shadow-md'>
                 <div className='p-4'>
                   <h3 className='text-xl font-bold mb-2'>{drink.name}</h3>
-                  <p className='text-gray-500 mb-4'>{drink.description}</p>
-                  <h4 className='text-lg font-bold mb-2'>Ingredients:</h4>
+                  <p className='text-gray-800 mb-4'>{drink.description}</p>
+                  <h4 className='font-bold mb-2'>Ingredients:</h4>
+                  <ul className="mb-4 list-disc list-inside">
                   {drink.recipe.ingredients.map((ingredient) => {
                     return (
-                      <p key={ingredient.name}>
+                      <li key={ingredient.name}>
                         {ingredient.quantity} {ingredient.name}
-                      </p>
+                      </li>
                     );
                   })}
-                  <h4 className='text-lg font-bold mb-2'>Instructions:</h4>
-                  {drink.recipe.instructions.map((instruction) => {
-                    return <p key={instruction}>{instruction}</p>;
-                  })}
+                  </ul>
+                  <h4 className='font-bold mb-2'>Instructions:</h4>
+                  <ol className="mb-4 list-decimal list-inside">
+                    {drink.recipe.instructions.map((instruction) => {
+                      return <li key={instruction}>{instruction}</li>;
+                    })}
+                  </ol>
+                  
                   {Auth.loggedIn() && (
                     <button
                       disabled={savedDrinkIds?.some(
