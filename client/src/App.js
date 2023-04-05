@@ -50,11 +50,7 @@ function App() {
         <div className='w-full h-screen bg'>
           <div className='overlay'>
             <Header />
-            <div className='flex px-4'>
-              {/* <div className='px-4'>
-                <Playlist />
-              </div> */}
-              
+            <div>
               <Routes>
                 <Route path='/' element={<Home />} />
                 <Route path='/login' element={<LogIn />} />
