@@ -15,7 +15,7 @@ import LogIn from './pages/LogIn';
 import Header from './components/Header';
 import SavedDrinks from './pages/SavedDrinks';
 import SignUp from './pages/SignUp';
-import Playlist from './components/Playlist';
+import Footer from './components/Footer';
 
 // Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
@@ -50,15 +50,22 @@ function App() {
         <div className='w-full h-screen bg'>
           <div className='overlay'>
             <Header />
-            <Playlist />
-            <Routes>
-              <Route path='/' element={<Home />} />
-              <Route path='/login' element={<LogIn />} />
-              <Route path='/signup' element={<SignUp />} />
-              <Route path='/saved' element={<SavedDrinks/>} />
-            </Routes>
+            <div className='flex px-4'>
+              {/* <div className='px-4'>
+                <Playlist />
+              </div> */}
+              
+              <Routes>
+                <Route path='/' element={<Home />} />
+                <Route path='/login' element={<LogIn />} />
+                <Route path='/signup' element={<SignUp />} />
+                <Route path='/saved' element={<SavedDrinks/>} />
+              </Routes>
+            </div>
           </div>
+            <Footer />
         </div>
+        
       </Router>
     </ApolloProvider>
   );
