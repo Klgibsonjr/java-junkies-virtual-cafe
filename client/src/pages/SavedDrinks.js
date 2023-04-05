@@ -1,11 +1,4 @@
 import React from 'react';
-import {
-  Container,
-  Card,
-  Button,
-  Row,
-  Col
-} from 'react-bootstrap';
 
 import { useQuery, useMutation } from '@apollo/client';
 import { QUERY_ME } from '../utils/queries';
@@ -60,9 +53,9 @@ const SavedDrinks = () => {
             }:`
             : 'You have no saved drinks!'}
         </h2>
-        <div className="flex flex-wrap -mx-2">
+        <div className="flex grid grid-cols-3 gap-4-wrap -mx-2">
           {userData.savedDrinks?.map((drink) => (
-            <div className='bg-card rounded-lg shadow-md' key={drink.name}>
+            <div className='bg-card rounded-lg shadow-md m-2' key={drink.name}>
               <div className="p-4">
                 <h3 className="text-xl font-bold mb-2">{drink.name}</h3>
                 <p className='text-gray-800 mb-4'>{drink.description}</p>

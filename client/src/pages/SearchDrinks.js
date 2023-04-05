@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { useMutation } from '@apollo/client';
 import { SAVE_DRINK } from '../utils/mutations';
 import { saveDrinkIds, getSavedDrinkIds } from '../utils/localStorage';
+import drinks from '../assests/data/seed';
 
 import Auth from '../utils/Auth';
 
@@ -27,24 +28,33 @@ const SearchDrinks = () => {
     }
 
     try {
-      const options = {
-        method: 'GET',
-        headers: {
-          'X-RapidAPI-Key': process.env.REACT_APP_RAPID_API_KEY,
-          'X-RapidAPI-Host': 'the-coffee-api.p.rapidapi.com',
-        },
-      };
 
-      const response = await fetch(
-        `https://the-coffee-api.p.rapidapi.com/drinks/${searchInput}?keys=description%2Crecipe`,
-        options
-      );
+    // COMMENTING API CALL OUT SINCE IT IS RETURNING 503 ERRORS. 
+    // USING SEED DATA UNTIL API IS WORKING AGAIN.
+      // const options = {
+      //   method: 'GET',
+      //   headers: {
+      //     'X-RapidAPI-Key': process.env.REACT_APP_RAPID_API_KEY,
+      //     'X-RapidAPI-Host': 'the-coffee-api.p.rapidapi.com',
+      //   },
+      // };
 
-      if (!response.ok) {
-        throw new Error('an error occured');
-      }
+      // const response = await fetch(
+      //   `https://the-coffee-api.p.rapidapi.com/drinks/${searchInput}?keys=description%2Crecipe`,
+      //   options
+      // );
 
-      const items = await response.json();
+      // if (!response.ok) {
+      //   throw new Error('an error occured');
+      // }
+
+      // const items = await response.json();
+
+      // const items = drinks
+
+      const items = drinks.filter((drink) =>
+      drink.name.toLowerCase().includes(searchInput.toLowerCase())
+    );
 
       const drinkData = items.map((drink) => ({
         name: drink.name,
@@ -111,14 +121,12 @@ const SearchDrinks = () => {
 
       <div className='max-w-7xl mx-auto py-5'>
         <h2 className='text-slate-100 text-2xl sm:text-3xl font-bold mb-5'>
-          {searchedDrinks.length
-            ? `Viewing ${searchedDrinks.length} results:`
-            : 'Search for a drink to begin!'}
+          {searchedDrinks.length > 0 && `Viewing ${searchedDrinks.length} results:`}
         </h2>
-        <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4'>
+        <div className='grid grid-rows-1 gap-4'>
           {searchedDrinks.map((drink) => {
             return (
-              <div key={drink.name} className='bg-card rounded-lg shadow-md'>
+              <div key={drink.name} className='bg-card rounded-lg shadow-md m-2'>
                 <div className='p-4'>
                   <h3 className='text-xl font-bold mb-2'>{drink.name}</h3>
                   <p className='text-gray-800 mb-4'>{drink.description}</p>
