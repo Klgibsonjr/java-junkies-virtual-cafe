@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 
-// hello world!
 import { useMutation } from '@apollo/client';
 import { SAVE_DRINK } from '../utils/mutations';
 import { saveDrinkIds, getSavedDrinkIds } from '../utils/localStorage';
