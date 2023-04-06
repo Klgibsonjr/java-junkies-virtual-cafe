@@ -1,70 +1,69 @@
-# Getting Started with Create React App
+<h1 align=center> Java Junkies </h1>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## License
 
-## Available Scripts
+![License: MIT](https://img.shields.io/badge/License-MIT-purple.svg)
 
-In the project directory, you can run:
+---
 
-### `npm start`
+## Description
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+> Java Junkies virtually brings the coffee shop experience to the comfort of your own home.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+---
 
-### `npm test`
+## Table of Contents
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- [License](#license)
+- [User Story](#user-story)
+- [Technologies](#technologies)
+- [Demostration](#demonstration)
+- [Collaborators](#collaborators)
 
-### `npm run build`
+---
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## User Story
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```md
+AS A coffee enthusiast,
+I WANT a virtual coffee experience
+WHERE I can search and save various coffee drinks and their recipes
+SO I can recreate the drink at home while easy-listening music in the background
+SO THAT I can bring the ambience of a coffee shop to my home.
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+---
 
-### `npm run eject`
+## Technologies
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- React
+- TailwindCSS
+- Express.js
+- Node.js
+- GraphQL
+- JWT Decode
+- Apollo Server
+- Concurrently
+- Kofi (Tipping/Donation Service)
+- The Coffee API
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+---
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Demonstration
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Click on the link below to start your virtual coffee shop experience today!
 
-## Learn More
+[Java Junkies](https://java-junkies-virtual-cafe.herokuapp.com/)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+![Java Junkies](./client/src/assests/images/SCR-20230405-nwy.png)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+---
 
-### Code Splitting
+## Collaborators
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Meet the Java Junkies team:
 
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- [Carli Hudson](https://github.com/carlihudson) - Back-end Functionality, GraphQL Database
+- [Sierra Ford](https://github.com/sieraford) - Front-End/Back-End Functionality
+- [Matt Tobin](https://github.com/Tobin-Matt) - Front-End Functionality, Back-End/Models Functionality
+- [Ken Gibson](https://github.com/Klgibsonjr) - UX/UI, React, CSS (Tailwind)
