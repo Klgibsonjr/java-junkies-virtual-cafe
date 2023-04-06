@@ -40,12 +40,15 @@ SO THAT I can bring the ambience of a coffee shop to my home.
 - TailwindCSS
 - Express.js
 - Node.js
+- MongoDB
 - GraphQL
 - JWT Decode
 - Apollo Server
 - Concurrently
+- Heroku
+- Github
 - Kofi (Tipping/Donation Service)
-- The Coffee API
+- The Coffee API (Rapid API)
 
 ---
 
@@ -64,6 +67,6 @@ Click on the link below to start your virtual coffee shop experience today!
 Meet the Java Junkies team:
 
 - [Carli Hudson](https://github.com/carlihudson) - Back-end Functionality, GraphQL Database
-- [Sierra Ford](https://github.com/sieraford) - Front-End/Back-End Functionality
+- [Siera Ford](https://github.com/sieraford) - Front-End/Back-End Functionality
 - [Matt Tobin](https://github.com/Tobin-Matt) - Front-End Functionality, Back-End/Models Functionality
 - [Ken Gibson](https://github.com/Klgibsonjr) - UX/UI, React, CSS (Tailwind)
