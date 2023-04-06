@@ -40,6 +40,7 @@ SO THAT I can bring the ambience of a coffee shop to my home.
 - TailwindCSS
 - Express.js
 - Node.js
+- MongoDB
 - GraphQL
 - JWT Decode
 - Apollo Server
@@ -47,7 +48,7 @@ SO THAT I can bring the ambience of a coffee shop to my home.
 - Heroku
 - Github
 - Kofi (Tipping/Donation Service)
-- The Coffee API
+- The Coffee API (Rapid API)
 
 ---
 
